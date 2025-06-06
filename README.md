@@ -1,2 +1,5 @@
 # Optimizarea-retelelor-neuronale-convolutionale-cu-complexitate-redusa
-Optimizarea reţelelor neuronale convolutionale cu complexitate redusă pentru recunoaşterea afecțiunilor clinice din imagini biomedicale
+Titlul temei: Optimizarea reţelelor neuronale convolutionale cu complexitate redusă pentru recunoaşterea afecțiunilor clinice din imagini biomedicale
+
+2. Descrierea temei:
+Se vor identifica o serie de baze de date relevante pentru problematica diagnozei pe baza imaginilor biomedicale (cancer cervical, afectiunii ale pielii, fund de ochi, etc.). Pentru bazele de date alese se vor implementa (în Python, utilizând biblioteci relevante, de ex. Keras3 cu backend-uri diferite) mai multe modele de rețele neuronale convoluționale “deep-learning” cu complexitate redusă (de exemplu VRES-CNN, Efficinet Net, Mobile-NET, etc.) urmărind pentru fiecare dintre ele optimizarea cu obţinerea celor mai bune performante funcţionale (acurateţe a recunoaşterii) în condiţiile unor timpi de recunoaştere şi ocupare a memoriei cât mai reduse. Modelele optimale antrenate se vor integra într-o aplicație prin intermediul căreia se pot realiza diagnoze pornind de la imagini noi introduse de utilizator. Se vor evalua performanțele aplicației, în special acuratețea şi timpul de răspuns.
