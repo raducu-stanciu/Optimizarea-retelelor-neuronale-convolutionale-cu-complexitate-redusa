@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Image_classifier</string>
+    <string name="select_button_text">Select Image</string>
+    <string name="classify_button_text">Classify</string>
+    <string name="result_text_placeholder">Select an image to classify</string>
+    <string name="selected_image">Selected image</string>
+    <string name="classification_error_message">Error: %1$s</string>
+</resources>
