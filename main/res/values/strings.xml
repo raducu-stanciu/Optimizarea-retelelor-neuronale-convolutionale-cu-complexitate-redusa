@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Image_classifier</string>
-    <string name="select_button_text">Selectează imaginea</string>
-    <string name="classify_button_text">Clasifică</string>
-    <string name="result_text_placeholder">Selectează o imagine pentru clasificare</string>
-    <string name="selected_image">Selectează o imagine</string>
-    <string name="classification_error_message">Error: %1$s</string>
-</resources>
