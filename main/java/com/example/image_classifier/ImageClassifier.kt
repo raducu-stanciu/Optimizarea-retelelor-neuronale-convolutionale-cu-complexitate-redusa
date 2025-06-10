@@ -18,28 +18,14 @@ class ImageClassifier(private val context: Context) {
     private var interpreter: Interpreter? = null
     var isInitialized = false
         private set
-    /** Executor to run inference task in the background. */
+
     private val executorService: ExecutorService = Executors.newCachedThreadPool()
-    private var inputImageWidth: Int = 0 // Va fi interpretată de modelul TF Lite.
-    private var inputImageHeight: Int = 0 // Va fi interpretată de modelul TF Lite.
-    private var modelInputSize: Int = 0 // Va fi interpretată de modelul TF Lite.
+    private var inputImageWidth: Int = 0 // Dimensiunile vor fi interpretate de modelul TF Lite.
+    private var inputImageHeight: Int = 0
+    private var modelInputSize: Int = 0
     // Etichetele pentru clasele de ieșire ale modelului
     private lateinit var labels: List<String>
-  /*  fun initialize(): Task<Void?> {
-        val task = TaskCompletionSource<Void?>()
-        executorService.execute {
-            try {
-                // Incarca etichetele from assets
-                loadLabels()
-                task.setResult(null)
-                Log.d(TAG, "Classifier initialized successfully")
-            } catch (e: IOException) {
-                task.setException(e)
-                Log.e(TAG, "Error initializing classifier", e)
-            }
-        }
-        return task.task
-    }*/
+
     fun loadModelFromAssets(filename: String): Task<Void?> {
         val task = TaskCompletionSource<Void?>()
         executorService.execute {
@@ -110,7 +96,7 @@ class ImageClassifier(private val context: Context) {
     }
     private fun classify(bitmap: Bitmap): String {
         check(isInitialized) { "Modelul nu a fost inițializat încă." }  //TF Lite Interpreter is not initialized yet
-        // Preprocesare, redimensionarea imaginii de intrare pentru a se potrivi cu modelul
+        // Preprocesare, redimensionarea imaginii de intrare pentru a se potrivi cu cerintele modelului
         val resizedImage = Bitmap.createScaledBitmap(
             bitmap,
             inputImageWidth,
@@ -121,7 +107,7 @@ class ImageClassifier(private val context: Context) {
         byteBuffer.rewind()  // Rezeteaza pozitia la inceput
         Log.d(TAG, "Android first pixels:")
         Log.d(TAG, "First pixel: R=${byteBuffer.float}, G=${byteBuffer.float}, B=${byteBuffer.float}")
-        byteBuffer.rewind()  // Reset position for inference
+        byteBuffer.rewind()  // Reseteaza pozitia pentru inferenta
         val outputSize = if (labels.size > 0) labels.size else 1001
         val output = Array(1) { FloatArray(outputSize) }
         //  Măsurarea timpului de inferență
@@ -166,8 +152,7 @@ class ImageClassifier(private val context: Context) {
         val resizedImage = Bitmap.createScaledBitmap(bitmap, inputImageWidth, inputImageHeight, true)
         val pixels = IntArray(inputImageWidth * inputImageHeight)
         resizedImage.getPixels(pixels, 0, resizedImage.width, 0, 0, resizedImage.width, resizedImage.height)
-    // Modificarea cheie: stocarea datelor pixelilor în format înălțime × lățime × canal
-    // Aceasta corespunde încărcării imaginilor în codul Python (folosind PIL)
+    //  stocarea datelor pixelilor în format înălțime × lățime × canal
         val imageArray = Array(inputImageHeight) { y ->
             Array(inputImageWidth) { x ->
                 val pixelIndex = y * inputImageWidth + x
@@ -196,6 +181,6 @@ class ImageClassifier(private val context: Context) {
         private const val TAG = "ImageClassifier"
 
         private const val FLOAT_TYPE_SIZE = 4
-        private const val PIXEL_SIZE = 3  // RGB channels
+        private const val PIXEL_SIZE = 3  // canelele RGB
     }
 }
