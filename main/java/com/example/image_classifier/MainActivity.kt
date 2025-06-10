@@ -43,11 +43,11 @@ class MainActivity : AppCompatActivity() {
         legendButton?.setOnClickListener {
             showLegendDialog()
         }
-        // Aici schimbăm: afișăm dialog cu modelele din assets
+        // Se afișează modelele din assets
         modelButton?.setOnClickListener {
             showModelSelectionDialogFromAssets()
         }
-        // Initialize classifier (default model)
+
 
         resultTextView?.text = "Selectează un model pentru a începe."
     }
